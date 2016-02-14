@@ -29,6 +29,8 @@ public class MongoDBContextListener implements ServletContextListener {
 			System.out.println("MongoClient init started.");
 			System.out.println("MONGODB_SERVICE_HOST = " + System.getenv("MONGODB_SERVICE_HOST"));
 			System.out.println("MONGODB_SERVICE_PORT = " + System.getenv("MONGODB_SERVICE_PORT"));
+			String mongodb_user = System.getenv("MONGODB_SERVICE_PORT");
+			System.out.println("MONGODB_USER = " + mongodb_user);
 			System.out.println("Integer.parseInt = " + Integer.parseInt(System.getenv("MONGODB_SERVICE_PORT")));
 			ServletContext ctx = sce.getServletContext();
 			MongoClient mongo = new MongoClient(System.getenv("MONGODB_SERVICE_HOST"), Integer.parseInt(System.getenv("MONGODB_SERVICE_PORT")));

@@ -47,7 +47,7 @@ public class MongoDBContextListener implements ServletContextListener {
 			// System.getenv("MONGOD_SERVICE_HOST"),
 			// Integer.parseInt(ctx.getInitParameter("MONGODB_SERVICE_PORT")));
 			System.out.println("MongoClient initialized successfully");
-			mongoDB = mongo.getDB("sampledb");
+			mongoDB = mongo.getDB("journaldev");
                         if (mongoDB.authenticate("userWTW", "IxD3dSgnnWLl6Kv3".toCharArray()) == false) {
 			System.out.println("Failed to authenticate DB ");
 		        }

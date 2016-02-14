@@ -8,11 +8,13 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import com.mongodb.MongoClient;
-import com.mongodb.MongoCredential;
+import com.mongodb.DB;
 
 @WebListener
 public class MongoDBContextListener implements ServletContextListener {
 
+        private DB mongoDB;
+        
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
 		MongoClient mongo = (MongoClient) sce.getServletContext()
@@ -38,13 +40,17 @@ public class MongoDBContextListener implements ServletContextListener {
 			System.out.println("MONGODB_DATABASE = " + mongodb_database);
 			System.out.println("Integer.parseInt = " + Integer.parseInt(System.getenv("MONGODB_SERVICE_PORT")));
 			ServletContext ctx = sce.getServletContext();
-			MongoCredential	mongoCredential = new createCredential("userWTW", "sampledb", "IxD3dSgnnWLl6Kv3");
+			// MongoCredential	mongoCredential = new createCredential("userWTW", "sampledb", "IxD3dSgnnWLl6Kv3");
 			System.out.println("Credentials: " + mongoCredential.getUserName());
 			MongoClient mongo = new MongoClient(System.getenv("MONGODB_SERVICE_HOST"), Integer.parseInt(System.getenv("MONGODB_SERVICE_PORT")));
 			// ctx.getInitParameter("MONGODB_HOST"), 
 			// System.getenv("MONGOD_SERVICE_HOST"),
 			// Integer.parseInt(ctx.getInitParameter("MONGODB_SERVICE_PORT")));
 			System.out.println("MongoClient initialized successfully");
+			mongoDB = mongo.getDB("sampledb");
+                        if (mongoDB.authenticate("userWTW", "IxD3dSgnnWLl6Kv3") == false) {
+			System.out.println("Failed to authenticate DB ");
+		        }
 			sce.getServletContext().setAttribute("MONGO_CLIENT", mongo);
 		} catch (UnknownHostException e) {
 			throw new RuntimeException("MongoClient init failed");

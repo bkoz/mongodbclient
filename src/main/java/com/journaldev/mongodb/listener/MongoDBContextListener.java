@@ -8,6 +8,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoCredential;
 
 @WebListener
 public class MongoDBContextListener implements ServletContextListener {
@@ -30,13 +31,14 @@ public class MongoDBContextListener implements ServletContextListener {
 			System.out.println("MONGODB_SERVICE_HOST = " + System.getenv("MONGODB_SERVICE_HOST"));
 			System.out.println("MONGODB_SERVICE_PORT = " + System.getenv("MONGODB_SERVICE_PORT"));
 			String mongodb_user = System.getenv("MONGODB_USER");
-			System.out.println("MONGODB_USER = " + mongodb_user);
+			System.out.println("MONGODB_USER = " + System.getenv("MONGODB_USER"));
 			String mongodb_password = System.getenv("MONGODB_PASSWORD");
 			System.out.println("MONGODB_PASSWORD = " + mongodb_password);
 			String mongodb_database = System.getenv("MONGODB_DATABASE");
 			System.out.println("MONGODB_DATABASE = " + mongodb_database);
 			System.out.println("Integer.parseInt = " + Integer.parseInt(System.getenv("MONGODB_SERVICE_PORT")));
 			ServletContext ctx = sce.getServletContext();
+			// MongoCredential	new createCredential(mongodb_user, mongodb_database, mongodb_password)
 			MongoClient mongo = new MongoClient(System.getenv("MONGODB_SERVICE_HOST"), Integer.parseInt(System.getenv("MONGODB_SERVICE_PORT")));
 			// ctx.getInitParameter("MONGODB_HOST"), 
 			// System.getenv("MONGOD_SERVICE_HOST"),

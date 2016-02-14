@@ -7,4 +7,5 @@ MONGODB_PASSWORD=password
 
 MONGODB_DATABASE=journaldev
 
+These env vars need to be added to the build config to be visible.
 

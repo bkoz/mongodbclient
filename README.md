@@ -1,11 +1,5 @@
 # mongodbclient
-Set the following parms when creating the mongodb pod:
+Set the following parms when creating the OpenShift app:
 
-MONGODB_USER=user
-
-MONGODB_PASSWORD=password
-
-MONGODB_DATABASE=journaldev
-
-These env vars need to be added to the build config to be visible.
+$ oc new-app --template=mongodb-ephemeral --params=MONGODB_USER=user,MONGODB_PASSWORD=password,MONGODB_DATABASE=journaldev
 

@@ -25,36 +25,37 @@ public class MongoDBContextListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		try {
-			//
-			// The following variables are provided by the Kubernetes "mongod" service.
-			//
-			System.out.println("MongoClient init started.");
-			System.out.println("MONGODB_SERVICE_HOST = " + System.getenv("MONGODB_SERVICE_HOST"));
-			System.out.println("MONGODB_SERVICE_PORT = " + System.getenv("MONGODB_SERVICE_PORT"));
-			String mongodb_user = System.getenv("MONGODB_USER");
-			System.out.println("MONGODB_USER = " + System.getenv("MONGODB_USER"));
-			String mongodb_password = System.getenv("MONGODB_PASSWORD");
-			System.out.println("MONGODB_PASSWORD = " + mongodb_password);
-			String mongodb_database = System.getenv("MONGODB_DATABASE");
-			System.out.println("MONGODB_DATABASE = " + mongodb_database);
-			System.out.println("Integer.parseInt = " + Integer.parseInt(System.getenv("MONGODB_SERVICE_PORT")));
-			ServletContext ctx = sce.getServletContext();
-			// MongoCredential	mongoCredential = new createCredential("userWTW", "sampledb", "IxD3dSgnnWLl6Kv3");
-			// System.out.println("Credentials: " + mongoCredential.getUserName());
-			MongoClient mongo = new MongoClient(System.getenv("MONGODB_SERVICE_HOST"), Integer.parseInt(System.getenv("MONGODB_SERVICE_PORT")));
-			System.out.println("MONGODB_HOST = " + ctx.getInitParameter("MONGODB_HOST"));
-			// System.getenv("MONGOD_SERVICE_HOST")
-			// Integer.parseInt(ctx.getInitParameter("MONGODB_SERVICE_PORT")));
-			System.out.println("MongoClient initialized successfully");
-			mongoDB = mongo.getDB("journaldev");
-                        if (mongoDB.authenticate("user", "password".toCharArray()) == false) {
-			System.out.println("Failed to authenticate DB ");
-		        }
-			sce.getServletContext().setAttribute("MONGO_CLIENT", mongo);
-		} catch (UnknownHostException e) {
-			throw new RuntimeException("MongoClient init failed");
-		}
+          try {
+            //
+            // The following variables are provided by the Kubernetes "mongod" service.
+            //
+            System.out.println("MongoClient init started.");
+            System.out.println("MONGODB_SERVICE_HOST = " + System.getenv("MONGODB_SERVICE_HOST"));
+            System.out.println("MONGODB_SERVICE_PORT = " + System.getenv("MONGODB_SERVICE_PORT"));
+            String mongodb_user = System.getenv("MONGODB_USER");
+            System.out.println("MONGODB_USER = " + System.getenv("MONGODB_USER"));
+            String mongodb_password = System.getenv("MONGODB_PASSWORD");
+            System.out.println("MONGODB_PASSWORD = " + mongodb_password);
+            String mongodb_database = System.getenv("MONGODB_DATABASE");
+            System.out.println("MONGODB_DATABASE = " + mongodb_database);
+            System.out.println("Integer.parseInt = " + Integer.parseInt(System.getenv("MONGODB_SERVICE_PORT")));
+            ServletContext ctx = sce.getServletContext();
+            // MongoCredential	mongoCredential = new createCredential("userWTW", "sampledb", "IxD3dSgnnWLl6Kv3");
+            // System.out.println("Credentials: " + mongoCredential.getUserName());
+            MongoClient mongo = new MongoClient(System.getenv("MONGODB_SERVICE_HOST"), Integer.parseInt(System.getenv("MONGODB_SERVICE_PORT")));
+            System.out.println("Variables defined in web.xml:");
+            System.out.println("MONGODB_HOST = " + ctx.getInitParameter("MONGODB_HOST"));
+            // System.getenv("MONGOD_SERVICE_HOST")
+            // Integer.parseInt(ctx.getInitParameter("MONGODB_SERVICE_PORT")));
+            System.out.println("MongoClient initialized successfully");
+            mongoDB = mongo.getDB("journaldev");
+            if (mongoDB.authenticate("user", "password".toCharArray()) == false) {
+              System.out.println("Failed to authenticate DB ");
+            }
+            sce.getServletContext().setAttribute("MONGO_CLIENT", mongo);
+          } catch (UnknownHostException e) {
+            throw new RuntimeException("MongoClient init failed");
+          }
 	}
 
 }

@@ -51,7 +51,7 @@ public class MongoDBContextListener implements ServletContextListener {
       System.out.println("MONGODB_HOST = " + ctx.getInitParameter("MONGODB_HOST"));
       // System.getenv("MONGOD_SERVICE_HOST")
       // Integer.parseInt(ctx.getInitParameter("MONGODB_SERVICE_PORT")));
-      if (mongo != false) {
+      if (mongo != null) {
         System.out.println("MongoClient initialized successfully");
       } else {
         System.out.println("MongoClient: ERROR initializing mongodb!");

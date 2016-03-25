@@ -65,7 +65,10 @@ public class MongoDBContextListener implements ServletContextListener {
       }
       sce.getServletContext().setAttribute("MONGO_CLIENT", mongo);
     } catch (UnknownHostException e) {
+      e printStackTrace();
       throw new RuntimeException("MongoClient init failed");
+    } catch (MongoException e) {
+       e printStackTrace();
     }
   }
 

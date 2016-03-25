@@ -43,8 +43,8 @@ public class MongoDBContextListener implements ServletContextListener {
 			// MongoCredential	mongoCredential = new createCredential("userWTW", "sampledb", "IxD3dSgnnWLl6Kv3");
 			// System.out.println("Credentials: " + mongoCredential.getUserName());
 			MongoClient mongo = new MongoClient(System.getenv("MONGODB_SERVICE_HOST"), Integer.parseInt(System.getenv("MONGODB_SERVICE_PORT")));
-			// ctx.getInitParameter("MONGODB_HOST"), 
-			// System.getenv("MONGOD_SERVICE_HOST"),
+			System.out.println("MONGODB_HOST = " + ctx.getInitParameter("MONGODB_HOST"));
+			// System.getenv("MONGOD_SERVICE_HOST")
 			// Integer.parseInt(ctx.getInitParameter("MONGODB_SERVICE_PORT")));
 			System.out.println("MongoClient initialized successfully");
 			mongoDB = mongo.getDB("journaldev");

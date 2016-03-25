@@ -7,6 +7,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import com.mongodb.MongoClient;
 import com.mongodb.DB;
+import com.mongodb.MongoException;
 
 @WebListener
 public class MongoDBContextListener implements ServletContextListener {
